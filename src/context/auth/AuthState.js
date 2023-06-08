@@ -61,8 +61,6 @@ const AuthState = (props) => {
   });
 
   async function loginUser(e) {
-
-
     e.preventDefault();
     const response = await fetch("http://localhost:8000/auth/login-user", {
       method: "POST",
@@ -85,8 +83,8 @@ const AuthState = (props) => {
       localStorage.setItem('userId', JSON.stringify(data.data.user.id));
     }
 
-      navigate('/add_details')
-    
+    navigate('/add_details')
+
   }
 
 
@@ -154,8 +152,21 @@ const AuthState = (props) => {
   
   const [detailAdded, setDetailAdded] = useState(false);
 
+
+  // EDIT MODAL START
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+    
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  // EDIT MODAL END
+
   return (
-    <AuthContext.Provider value={{ detailAdded, setDetailAdded, detailCredentials, setDetailCredentials, addDetails, login, message, status, loginUser, loginCredentials, setLoginCredentials, registedUser, toggleLoginSignup, message, status, credentials, setCredentials }}>
+    <AuthContext.Provider value={{ openModal, closeModal, isModalOpen, setIsModalOpen, detailAdded, setDetailAdded, detailCredentials, setDetailCredentials, addDetails, login, message, status, loginUser, loginCredentials, setLoginCredentials, registedUser, toggleLoginSignup, message, status, credentials, setCredentials }}>
       {props.children}
     </AuthContext.Provider>
   );

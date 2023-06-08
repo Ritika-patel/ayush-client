@@ -15,6 +15,7 @@ const AddDetails = () => {
   } = context;
 
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   //adding details
 
@@ -27,42 +28,47 @@ const AddDetails = () => {
         console.log("User not found");
         navigate("/"); // Redirect to the login page if user token is invalid or not found
       } else {
-        const userId = JSON.parse(localStorage.getItem('userId'));
+        const userId = JSON.parse(localStorage.getItem("userId"));
         // Check if details are already added by fetching the detail based on userId
         const fetchDetail = async () => {
           try {
-            const response = await fetch(`http://localhost:8000/detail/fetch-single-detail/${userId}`);
-            console.log(response)
+            setLoading(true);
+            const response = await fetch(
+              `http://localhost:8000/detail/fetch-single-detail/${userId}`
+            );
+            console.log(response);
             if (response.ok) {
+             
               const data = await response.json();
-              // console.log(data)
               if (data.data) {
                 console.log("Details are already added");
-                console.log(data.data)
+                console.log(data.data);
                 navigate("/single_detail"); // Redirect to '/single_detail' page
               }
             } else {
               // Handle error response
-              console.error('Error fetching user detail');
+              console.error("Error fetching user detail");
             }
+            
           } catch (error) {
-            console.log(error)
-            console.error('Error fetching user detail', error);
+            console.log(error);
+            console.error("Error fetching user detail", error);
           }
+          
         };
-  
+
         fetchDetail();
-        
+
         console.log("Logged in");
         setUser(userToken);
+        setLoading(false);
       }
     } else {
       console.log("Don't try to see details without logging in");
       navigate("/");
     }
   }, []);
-  
-  
+
   // useEffect(() => {
   //   const handlePopstate = () => {
   //     handleLogout();
@@ -97,6 +103,9 @@ const AddDetails = () => {
     });
   };
 
+  if (loading === true) {
+    return <>Loading...</>;
+  } else {
     return (
       <>
         <button onClick={handleLogout}>Logout</button>
@@ -411,13 +420,10 @@ const AddDetails = () => {
         </div>
       </>
     );
+  }
 };
 
 export default AddDetails;
-
-
-
-
 
 // useEffect(() => {
 //   fetchDetail();
