@@ -171,8 +171,18 @@ const AuthState = (props) => {
   };
   // EDIT MODAL END
 
+  const handleLogout = () => {
+  
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("detailId");
+    setDetailAdded(false);
+    console.log("loged out");
+    navigate("/");
+  };
+
   return (
-    <AuthContext.Provider value={{ openModal, closeModal, isModalOpen, setIsModalOpen, detailAdded, setDetailAdded, detailCredentials, setDetailCredentials, addDetails, login, message, status, loginUser, loginCredentials, setLoginCredentials, registedUser, toggleLoginSignup, message, status, credentials, setCredentials }}>
+    <AuthContext.Provider value={{ handleLogout, openModal, closeModal, isModalOpen, setIsModalOpen, detailAdded, setDetailAdded, detailCredentials, setDetailCredentials, addDetails, login, message, status, loginUser, loginCredentials, setLoginCredentials, registedUser, toggleLoginSignup, message, status, credentials, setCredentials }}>
       {props.children}
     </AuthContext.Provider>
   );

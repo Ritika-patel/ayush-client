@@ -77,7 +77,7 @@ const Register = () => {
             >
               <option value="0">User Type</option>
               <option value="1">Hospital admin</option>
-              <option value="2">Dashboard admin</option>
+              {/* <option value="2">Dashboard admin</option> */}
             </select>
 
             <input
