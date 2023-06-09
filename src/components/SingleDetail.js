@@ -70,16 +70,8 @@ function SingleDetail() {
 
 
     try {
-      const token = JSON.parse(localStorage.getItem("token")).accessToken;
-      if (!token) {
-        throw new Error("No access token found");
-      }
-  
-      const response = await fetch(`http://localhost:8000/auth/delete-user/${userId}`, {
+        const response = await fetch(`http://localhost:8000/auth/delete-user/${userId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
   
       const data = await response.json();
@@ -87,6 +79,7 @@ function SingleDetail() {
   
       if (response.ok) {
         console.log(data.message);
+        handleLogout()
         // Perform any additional actions after successful deletion
       } else {
         throw new Error(data.message);

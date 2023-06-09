@@ -82,8 +82,13 @@ const AuthState = (props) => {
       localStorage.setItem('token', JSON.stringify(data.data.token))
       localStorage.setItem('userId', JSON.stringify(data.data.user.id));
     }
-
-    navigate('/add_details')
+    if (data.status==="success" && data.data.user.type===2) {
+      navigate('/List')
+    }else{
+      navigate('/add_details')
+    }
+    console.log(data)
+    // console.log(data.data.user.type)
 
   }
 
@@ -146,6 +151,7 @@ const AuthState = (props) => {
     if (data.status==="success") {
       navigate('/single_detail')
     }
+
     
     console.log(data);
   }

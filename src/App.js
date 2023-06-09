@@ -2,7 +2,7 @@ import './App.css';
 import Home from './components/Home'
 import SingleDetail from './components/SingleDetail'
 import Add_Details from './components/Add_Details'
-import Hospital_Details from './components/Hospital_details'
+import List from './components/List'
 import Navbar from './components/Navbar'
 import React, { useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -22,7 +22,7 @@ function App() {
                   <Routes>
                     <Route path="/single_detail" element={<SingleDetail />} />
                     <Route path="/add_details" element={<Add_Details />} />
-                    <Route path="/Hospital_details" element={<Hospital_Details />} />
+                    <Route path="/list" element={<List />} />
                   </Routes>
                 </>
               }

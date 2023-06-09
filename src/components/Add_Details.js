@@ -81,16 +81,7 @@ const AddDetails = () => {
   //   };
   // }, []);
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("detailId");
-    setDetailAdded(false);
-    setUser(null);
-    console.log("loged out");
-    navigate("/");
-  };
+
 
   if (!user) {
     return null; // Render an appropriate loading or authentication check
@@ -108,7 +99,6 @@ const AddDetails = () => {
   } else {
     return (
       <>
-        <button onClick={handleLogout}>Logout</button>
         <div className="formbold-main-wrapper">
           <div className="formbold-form-wrapper">
             <form onSubmit={addDetails}>
